@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}coucou mon grand!!!{% endblock %}
+
+{% block body %}
+{#	{{dump(ads)}}  #}
+<br>
+ <main class="container">
+ 	<div class="row justify-content-center">
+ 		<h1>Nos appartements</h1>
+ 	</div>
+ 	<div class="row">
+ 		{% for ad in ads %}
+			{% include ('ad/_ad.html.twig') %}
+ 		{% endfor %}	
+ 	</div>
+ </main>
+<br>    
+
+{% endblock %}

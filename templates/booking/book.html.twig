@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %} 
+{% form_theme form with ['bootstrap_4_layout.html.twig'] %} 
+{% block title %}Réserver l'annonce {{ ad.title }}{% endblock %} 
+{% block body %} 
+	<div class="container"> 
+		<h1> Réserver l'annonce {{ ad.title }}</h1> 
+		<p>Vous ètes sur le point de réserver l'annonce de {{ ad.author.firstName }} {{ ad.author.lastName }}</p> 
+		{{ form_start(form) }} 
+			<div class="row"> 
+				<div class="col"> 
+					{{ form_row(form.startDate, {'label':'Date de début','attr':{'placeholder':"date de début"}}) }} 
+				</div> 
+				<div class="col"> 
+					{{ form_row(form.endDate, {'label':'Date de fin','attr':{'placeholder':"Date de fin"}}) }} 
+				</div> 
+			</div> 
+			<div class="row"> 
+				<div class="col"> 
+					{{ form_row(form.comment, {'label':'Commentaire','attr':{'placeholder':"Ecrire un commentaire"}}) }} 
+				</div> 
+			</div> 
+			<h4>Montant du séjour: .....</h4> 
+			<span><strong>0 nuit à {{ ad.price }} / nuit</strong></span> <br/> 
+			<button type="submit" class="btn btn-success">Faire la réservation</button> 
+		{{ form_end(form) }} 
+	</div> 
+{% endblock %}

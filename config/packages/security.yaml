@@ -1,0 +1,51 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory: { memory: ~ }
+        in_database: 
+            entity:
+                class: App\Entity\User # entité qui sert à voir ou sont les utilisateurs
+                property: email # propriété de l'utilisateur qui permet de l'authentifier
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            # on se sert du provider in_database
+            provider: in_database     
+            
+            # on précise que l'on se connecte via un formulaire de login
+            form_login:
+                #endroit ou se situe le formulaire (nom d'une route)
+                login_path: account_login
+ 
+                #l'endroit a appeler pour vérifier les infos de login
+                check_path: account_login
+
+            logout:
+                path: account_logout # nom de la route qui permet de se déconnecter ?
+ 
+                # nom de la route où l'on doit aller après s'être déconnecté ?
+                target: account_login
+    
+
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

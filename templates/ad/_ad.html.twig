@@ -1,0 +1,17 @@
+<div class="col">
+	<div class="card mb-3" style="width: 18rem;">
+		<img src="{{ ad.coverImage }}" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h3 class="card-title">{{ad.title}}</h3>
+			<h5 class="card-title">{{ ad.rooms }} chambres {{ ad.price }} €/nuit</h5>
+			<p class="card-text text-justify">
+				{{ ad.introduction }}
+			</p>
+			<a href="{{ path ('ads_show',{'slug':ad.slug}) }}" class="btn btn-primary">En savoir plus</a>
+			{% if app.user and app.user == ad.author %} 
+				<a href="{{ path('ads_edit', {'slug':ad.slug}) }}" class="btn btn-primary mt-3 mb-3">Modifier l'annonce</a> 
+				<a href="{{ path('ads_delete', {'slug':ad.slug}) }}" class="btn btn-danger mt-3 mb-3" onclick="return confirm('Etes-vous sur de vouloir supprimer l\'annonce ?')">Supprimer l'annonce</a>
+			{% endif %}
+		</div>
+	</div>
+</div> 

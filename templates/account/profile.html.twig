@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %} 
+{% block title %}Modification du profil utilisateur{% endblock %} 
+{% block body %} 
+	<div class="container"> 
+		<h1>Modification du profil</h1>
+		 {{ form_start(form) }} 
+			 {{ form_row(form.firstName, {'label':'Prénom','attr':{'placeholder':"Votre Prénom"}}) }} 
+			 {{ form_row(form.lastName, {'label':'Nom','attr':{'placeholder':"Votre Nom"}}) }} 
+			 {{ form_row(form.email, {'label':'Email','attr':{'placeholder':"Votre email"}}) }} 
+			 {{ form_row(form.picture, {'label':'Image de profil','attr':{'placeholder':"Votre Image de profil"}}) }} 
+			 {{ form_row(form.introduction, {'label':'Introduction','attr':{'placeholder':"Votre introduction"}}) }} 
+			 {{ form_row(form.description, {'label':'Description','attr':{'placeholder':"Votre description"}}) }} 
+			 <button type="submit" class="btn btn-success">Enregistrer les modifications </button> 
+		 {{ form_end(form) }} 
+	</div> 
+{% endblock %}

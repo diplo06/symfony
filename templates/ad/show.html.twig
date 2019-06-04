@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}coucou mon grand!!!{% endblock %}
+
+{% block body %}
+{#
+{% for image in ad.images %}
+	{{dump(image)}} 
+{% endfor %}
+{{ dump(app.flashes) }}
+#}
+
+<main class="container">
+	<div class="row justify-content-center">
+		<h3 class="title">{{ad.title}}</h3>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-5">
+		  <img src="{{ ad.coverImage }}" alt="...">
+		</div>
+		<div class="bd-example col-4">
+			  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+				    <ol class="carousel-indicators">
+					    {% for image in ad.images %}
+					      <li data-target="#carouselExampleCaptions" data-slide-to="{{ loop.index0 }}" {% if loop.first%}class="active"{% endif %}></li>
+					    {% endfor %}
+				    </ol>
+				    <div class="carousel-inner">
+					    {% for image in ad.images %}
+					      <div class="carousel-item {% if loop.first %} active {% endif %}">
+					        <img src="{{ image.url }}" class="d-block w-100" alt="...">
+					        <div class="carousel-caption d-none d-md-block">
+						          <h5>{{ ad.title }}</h5>
+								  <p>{{ image.caption }}</p>
+					        </div>
+					      </div>
+					    {% endfor %}
+				    </div>
+				    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+				      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				      <span class="sr-only">Previous</span>
+				    </a>
+				    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+				      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				      <span class="sr-only">Next</span>
+				    </a>
+			  </div>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-6">
+			<br>
+	    <h5 class="title">{{ ad.rooms }} chambres {{ ad.price }} €/nuit</h5>
+	    <p class="text text-justify">
+	    	{{ ad.introduction }}
+	    </p>
+	    <p class="text text-justify">
+	    	{{ ad.content | raw }}
+	    </p>
+	    <a href="{{ path('booking_create',{'slug':ad.slug}) }}" class="btn btn-primary mt-3 mb-3">Réserver!</a>
+	    {% if app.user and app.user == ad.author %} 
+	    	<a href="{{ path('ads_edit', {'slug':ad.slug}) }}" class="btn btn-primary mt-3 mb-3">Modifier l'annonce</a> 
+	    {% endif %}
+	</div>
+	<div class="col-4">
+		<br>
+	    <div class="row justify-content-between">				
+			<img src="{{ ad.author.picture }}" class="img-fluid" >
+			<a href="{{ path('user_show',{'slug':ad.author.slug}) }}"> 
+				Auteur: {{ ad.author.firstName }} {{ ad.author.lastName }} 
+			</a>
+			<span class="badge badge-primary">{{ ad.author.ads | length }} Annonces</span>
+	 	</div>
+	 </div>	
+	</div> 
+</main>
+    
+
+{% endblock %}
